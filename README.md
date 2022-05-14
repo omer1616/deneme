@@ -1,1 +1,1 @@
-# deneme
+javascript tips and exercises
