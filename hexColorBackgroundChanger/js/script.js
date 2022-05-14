@@ -1,14 +1,19 @@
-const button = document.querySelector('button')
-const body = document.querySelector('body')
-const colors = ['red', 'green', 'blue', 'yellow', 'pink', 'purple']
+(function() {
+    const button = document.querySelector('#btn')
+    const body = document.querySelector('body')
+    const hexValues = [0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F']
+    const value = document.querySelector('#hex-value')
 
+    button.addEventListener('click', changeHex)
 
+    function changeHex(){
+        let hex = '#'
 
-
-body.style.backgroundColor = "violet"
-button.addEventListener('click', changeBackgroundColor)
-
-function changeBackgroundColor() {
-    const colorIndex = parseInt(Math.random()*colors.length)
-    body.style.backgroundColor = colors[colorIndex]
-}
+        for (let i = 0; i < 6; i++){
+            const index = Math.floor(Math.random()*hexValues.length)
+            hex += hexValues[index]
+        }
+        value.textContent = hex
+        body.style.backgroundColor = hex
+    }
+} )()
