@@ -12,13 +12,13 @@
 
     if (message.value === "") {
       feedback.classList.add("show");
-      setTimeout(function () {
+      setTimeout(() => {
         feedback.classList.remove("show");
-      }, 2000);
+      }, 1000);
     } else {
-      //Change message content and clear the message input
-      messageContent.textContent = message.value;
-      message.value = "";
+     messageContent.textContent =  message.value;
+     message.value =  "";
+     
     }
   });
 })();
