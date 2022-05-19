@@ -2,6 +2,9 @@ const display = document.querySelector(".calculator-input");
 const keys = document.querySelector(".calculator-keys");
 
 let displayValue = "0";
+let firstValue = null;
+let operator = null;
+let waitingForSeccondValue = false;
 
 uptateDisplay();
 
@@ -15,23 +18,71 @@ keys.addEventListener("click", function (e) {
   if (!element.matches("button")) return;
 
   if (element.classList.contains("operator")) {
-    console.log("operator", element.value);
+    // console.log("operator", element.value);
+    handleOperator(element.value);
     return;
   }
   if (element.classList.contains("clear")) {
-    console.log("operator", element.value);
+    clear();
+    uptateDisplay();
+    // console.log("operator", element.value);
     return;
   }
 
   if (element.classList.contains("decimal")) {
-    console.log("operator", element.value);
+    inputDecimal();
+    uptateDisplay();
+    // console.log("operator", element.value);
     return;
   }
-  //   console.log('number', element.value)
+  //console.log('number', element.value)
   inputNumber(element.value);
   uptateDisplay();
 });
 
+function handleOperator(nextOperator) {
+  const value = parseFloat(displayValue);
+
+  if (firstValue === null) {
+    firstValue = value;
+  } else if (operator) {
+    const result = calculate(firstValue, value, operator);
+
+    displayValue = String(result);
+    firstValue = result;
+  }
+  waitingForSeccondValue = true;
+}
+
 function inputNumber(num) {
-  displayValue = displayValue=== '0'? num: displayValue+num;
+  if (waitingForSeccondValue) {
+    displayValue = num;
+    waitingForSeccondValue = false;
+  } else {
+    displayValue = displayValue === "0" ? num : displayValue + num;
+  }
+  console.log(firstValue, operator, waitingForSeccondValue);
+}
+function calculate(first, second, operator) {
+  if (operator == "+") {
+    return first + second;
+  }else if (operator== "-"){
+      return first -second;
+  }else if (operator==  "*"){
+      return first*second
+  }else if(operator=="/"){
+      return first/second
+  }
+
+  return second;
+}
+
+function inputDecimal() {
+  if (!displayValue.includes(".")) {
+    displayValue += ".";
+  }
+}
+
+function clear() {
+  displayValue = "0";
 }
