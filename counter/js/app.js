@@ -1,7 +1,7 @@
 (function () {
   const buttons = document.querySelectorAll(".counterBtn");
   let count = 0;
-
+//dşfkmdl
   buttons.forEach(function (button) {
     button.addEventListener("click", function () {
       if (button.classList.contains("prevBtn")) {
